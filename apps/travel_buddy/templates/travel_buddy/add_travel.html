@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'travel_buddy/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Finger+Paint|Pacifico|Press+Start+2P|Roboto|Roboto+Slab|Trade+Winds" rel="stylesheet">
+  <title>Travel Buddy Add Travel</title>
+</head>
+<body>
+  <div id="wrapper">
+    <nav id="top-nav">
+      <nav class="nav-container">
+        <h6>Travel Buddy</h6>
+        <div class="nav-list">
+            <a href="/dash" class="nav-item">Home</a>
+            <a href="/logout" class="nav-item">Logout</a>
+        </div>
+      </nav>
+    </nav>
+    <div id="dash-container">
+      <div class="small-dash-container">
+        <!-- REGISTRATION FORM -->
+        <form action="/process_travel" class="form-add-travel" method="post">
+          {% csrf_token %}
+          <input type="text" name="destination" placeholder="Destination" class="input-field">
+          <input type="textarea" name="description" placeholder="Description" class="input-field">
+          <input type="date" name="travel_from" placeholder="Travel Date From" class="input-field">
+          <input type="date" name="travel_to" placeholder="Travel Date To" class="input-field">
+          <input type="submit" value="Add" class="input-btn">
+          {% if messages %}
+            {% for message in messages %}
+              <p class="errors"> {{ message }} </p>
+            {% endfor %}
+          {% endif %}
+        </form>
+      </div>
+    </div>
+    <div id="bot-nav">
+      <a href="/dash" class="nav-item nav-list" id="add-btn">Back</a>
+    </div>
+  </div>
+</body>
+</html>

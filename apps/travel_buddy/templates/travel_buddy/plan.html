@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'travel_buddy/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Finger+Paint|Pacifico|Press+Start+2P|Roboto|Roboto+Slab|Trade+Winds" rel="stylesheet">
+  <title>Travel Buddy Plan</title>
+</head>
+<body>
+  <div id="wrapper">
+    <nav id="top-nav">
+      <nav class="nav-container">
+        <h6>Travel Buddy</h6>
+        <div class="nav-list">
+          <div class="nav-item">
+            <a href="/dash" class="nav-item">Home</a>
+            <a href="/logout" class="nav-item">Logout</a>
+          </div>
+        </div>
+      </nav>
+    </nav>
+    <div id="container">
+      <div class="small-container">
+        <h5>{{ plan.destination }}</h5>
+        <p>Planned by: {{ plan.created_by.name }}</p>
+        <p>Travel Start Date: {{ plan.travel_from }}</p>
+        <p>Travel End Date: {{ plan.travel_to }}</p>
+        <p>Plan: {{ plan.description }}</p>
+      </div>
+      <div class="small-container">
+        <h5>Other users joining the trip</h5>
+        {% for user in user_list %}
+        <p>{{user.name}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

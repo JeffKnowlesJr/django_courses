@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load static %}
+  <!-- The line above tells Django to be ready to listen for static files -->
+  <link rel="stylesheet" href="{% static 'travel_buddy/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Finger+Paint|Pacifico|Press+Start+2P|Roboto|Roboto+Slab|Trade+Winds" rel="stylesheet">
+  <title>Travel Buddy</title>
+</head>
+<body>
+  <div id="wrapper">
+    <nav id="top-nav">
+      <nav class="nav-container">
+        <h6>Travel Buddy</h6>
+        <div class="nav-list">
+          <div class="nav-item">
+
+          </div>
+        </div>
+      </nav>
+    </nav>
+    <div id="container">
+      <div class="small-container">
+        <h5>Registration</h5>
+        <!-- REGISTRATION FORM -->
+        <form action="/create" method="post" class="form-container">
+          {% csrf_token %}
+          <input type="text" name="username" placeholder="Username" class="input-field">
+          <input type="text" name="name" placeholder="Full Name" class="input-field">
+          <input type="password" name="password" placeholder="Password" class="input-field">
+          <input type="password" name="confirm_password" placeholder="Confirm Password" class="input-field">
+          <input type="submit" value="Create Account" class="input-btn">
+        </form>
+        {% if messages %}
+          {% for message in messages %}
+            <p class="errors"> {{ message }} </p>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="small-container">
+        <h5>Login</h5>
+        <!-- LOGIN FORM -->
+        <form action="/login" method="post" class="form-container">
+          {% csrf_token %}
+          <input type="text" name="username" placeholder="Username" class="input-field">
+          <input type="password" name="password" placeholder="Password" class="input-field">
+          <input type="submit" value="Login" class="input-btn">
+        </form>
+        {% if messages %}
+          {% for message in messages %}
+            <p class="errors"> {{ message }} </p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

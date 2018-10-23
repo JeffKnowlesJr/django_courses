@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load static %}
+  <!-- The line above tells Django to be ready to listen for static files -->
+  <link rel="stylesheet" href="{% static 'travel_buddy/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Finger+Paint|Pacifico|Press+Start+2P|Roboto|Roboto+Slab|Trade+Winds" rel="stylesheet">
+  <title>Travel Buddy Dashboard</title>
+</head>
+<body>
+  <div id="wrapper">
+    <nav id="top-nav">
+      <nav class="nav-container">
+        <h6>Travel Buddy</h6>
+        <div class="nav-list">
+            <a href="/dash" class="nav-item">Home</a>
+            <a href="/logout" class="nav-item">Logout</a>
+        </div>
+      </nav>
+    </nav>
+    <div id="dash-container">
+      <div class="small-dash-container">
+        <h5>Your Trip Schedule</h5>
+        <table>
+          <thead>
+            <th class="hcell">Destination</th>
+            <th class="hcell">Travel Start Date</th>
+            <th class="hcell">Travel End Date</th>
+            <th class="hcell">Plan</th>
+          </thead>
+          {% for plan in your_plans %}
+          <tr>
+            <td class="tcell"><a href="plan/{{ plan.id }}">{{plan.destination}}</a></td>
+            <td class="tcell">{{ plan.travel_from }}</td>
+            <td class="tcell">{{ plan.travel_to }}</td>
+            <td class="tcell">{{ plan.description }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="small-dash-container">
+        <h5>Other User's Plans</h5>
+        <table>
+          <thead>
+            <th class="hcell">Name</th>
+            <th class="hcell">Travel Start Date</th>
+            <th class="hcell">Travel End Date</th>
+            <th class="hcell">Plan</th>
+            <th class="hcell">Join?</th>
+          </thead>
+          {% for plan in all_plans %}
+          <tr>
+            <td class="tcell">{{ plan.created_by.name }}</td>
+            <td class="tcell"><a href="plan/{{ plan.id }}">{{ plan.destination }}</a></td>
+            <td class="tcell">{{ plan.travel_from }}</td>
+            <td class="tcell">{{ plan.travel_to }}</td>
+            <td class="tcell"><a href="join/{{ plan.id }}">Join</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div id="bot-nav">
+      <a href="/add_travel" class="nav-item nav-list" class="add-btn">Add Travel Plan</a>
+    </div>
+  </div>
+</body>
+</html>
